@@ -19,8 +19,8 @@ public class Calculator2 {
     }
 
     // 간접 접근으로 필드에 접근하여 데이터를 삭제할 수 있게 Setter 메서드 구현
-    public void setStack() {
-        this.stack.pop();
+    public void setStack(int stack) {
+        this.stack.push(stack);
     }
 
     int calculate(int a, String o, int b) {
@@ -45,7 +45,6 @@ public class Calculator2 {
                     break;
             }
             //사칙연산 수행 후 결과값을 반환 및 연산 결과를 stack에 저장
-            stack.push(result);
             return result;
         }
     }

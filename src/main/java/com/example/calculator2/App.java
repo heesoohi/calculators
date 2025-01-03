@@ -23,22 +23,22 @@ public class App {
             System.out.print("사칙연산 기호(+, -, *, /)를 입력하세요: ");
             String o = sc.nextLine();
 
-            cal.calculate(a,o,b);
+            int result = cal.calculate(a,o,b);
+
+            // 연산 결과 추가 여부 확인
+            System.out.println("방금 연산 결과를 추가하시겠습니까? (yes 입력 시 추가)");
+            String set = sc.nextLine();
+            // yes 입력 시 stack 의 데이터 삭제
+            if (set.equals("yes")) {
+                cal.setStack(result);
+            }
 
             // 연산 결과 조회 여부 확인
             System.out.println("방금 연산의 결과를 조회하시겠습니까? (yes 입력 시 조회)");
             String get = sc.nextLine();
             // yes 입력 시 Calculator2의 stack 에 저장된 데이터 조회
             if (get.equals("yes")) {
-                cal.getStack();
-            }
-
-            // 연산 결과 삭제 여부 확인
-            System.out.println("방금 연산 결과를 삭제하시겠습니까? (yes 입력 시 삭제)");
-            String set = sc.nextLine();
-            // yes 입력 시 stack 의 데이터 삭제
-            if (set.equals("yes")) {
-                cal.setStack();
+                System.out.println(cal.getStack());
             }
 
             // 반복 확인
