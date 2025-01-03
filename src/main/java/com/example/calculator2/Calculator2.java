@@ -10,7 +10,18 @@ public class Calculator2 {
     int result;
 
     //연산 결과를 저장하는 컬렉션 타입 필드 : stack 활용
-    Stack<Integer> stack = new Stack<Integer>();
+    //외부에서 연산 결과를 저장한 stack 에 직접 접근하지 못하도록 캡슐화 w/ private
+    private Stack<Integer> stack = new Stack<Integer>();
+
+    // 간접 접근으로 필드를 확인할 수 있도록 Getter 메서드 구현
+    public int getStack() {
+        return stack.peek();
+    }
+
+    // 간접 접근으로 필드에 접근하여 데이터를 삭제할 수 있게 Setter 메서드 구현
+    public void setStack() {
+        this.stack.pop();
+    }
 
     int calculate(int a, String o, int b) {
         if (o.equals("/") && b == 0) {

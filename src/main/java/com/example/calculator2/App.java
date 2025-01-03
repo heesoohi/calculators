@@ -25,6 +25,22 @@ public class App {
 
             cal.calculate(a,o,b);
 
+            // 연산 결과 조회 여부 확인
+            System.out.println("방금 연산의 결과를 조회하시겠습니까? (yes 입력 시 조회)");
+            String get = sc.nextLine();
+            // yes 입력 시 Calculator2의 stack 에 저장된 데이터 조회
+            if (get.equals("yes")) {
+                cal.getStack();
+            }
+
+            // 연산 결과 삭제 여부 확인
+            System.out.println("방금 연산 결과를 삭제하시겠습니까? (yes 입력 시 삭제)");
+            String set = sc.nextLine();
+            // yes 입력 시 stack 의 데이터 삭제
+            if (set.equals("yes")) {
+                cal.setStack();
+            }
+
             // 반복 확인
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String repeat = sc.nextLine();
