@@ -3,7 +3,7 @@ package com.example.calculator2;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Calculator2 인스턴스 생성
         Calculator2 cal = new Calculator2();
 
@@ -29,7 +29,7 @@ public class App {
             String set = sc.nextLine();
             // yes 입력 시 stack 에 데이터 저장
             if (set.equals("yes")) {
-                cal.setStack(result);
+                cal.setList(result);
             }
 
             // 연산 결과 조회 여부 확인
@@ -37,7 +37,7 @@ public class App {
             String get = sc.nextLine();
             // yes 입력 시 Calculator2의 stack 에 저장된 데이터 조회
             if (get.equals("yes")) {
-                System.out.println(cal.getStack());
+                System.out.println(cal.getList());
             }
 
             // 가장 먼저 저장된 연산결과 데이터 삭제 여부 확인
