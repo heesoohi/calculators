@@ -7,7 +7,7 @@ public class Calculator2 {
 
     //연산 결과를 저장하는 컬렉션 타입 필드 : stack 활용
     //외부에서 연산 결과를 저장한 stack 에 직접 접근하지 못하도록 캡슐화 w/ private
-    private final List<Integer> list = new ArrayList<Integer>();
+    private final List<Integer> list = new ArrayList<>();
 
     // 간접 접근으로 필드를 확인할 수 있도록 Getter 메서드 구현
     public int getList() {
@@ -23,28 +23,13 @@ public class Calculator2 {
         int result = 0;
         try{
             // 3. 계산
-            // 유요한 연산자인지 먼저 확인
-            if (!(o.equals("+") || o.equals("-") || o.equals("*") || o.equals("/"))) {
-                throw new IllegalArgumentException("유효하지 않은 연산자입니다: " + o);
-            }
-            // 사칙연산 수행
-            switch (o) {
-                case "+":
-                    result = a + b;
-                    break;
-                case "-":
-                    result = a - b;
-                    break;
-                case "*":
-                    result = a * b;
-                    break;
-                case "/":
-                    if (b == 0) {
-                        throw new ArithmeticException("0으로 나눌 수 없습니다.");
-                    }
-                    result = a / b;
-                    break;
-            }
+            result = switch (o) {
+                case "+" -> a + b;
+                case "-" -> a - b;
+                case "*" -> a * b;
+                case "/" -> a / b;
+                default -> result;
+            };
         } catch (ArithmeticException e) {
             System.out.println("연산 오류: " + e.getMessage());
         } catch (IllegalArgumentException e) {
