@@ -4,14 +4,11 @@ import java.util.Stack;
 
 public class Calculator2 {
 
-    int a; // 첫 번째 숫자
-    int b; // 두 번째 숫자
-    String o; // 연산자(+, -, *, /)
     int result;
 
     //연산 결과를 저장하는 컬렉션 타입 필드 : stack 활용
     //외부에서 연산 결과를 저장한 stack 에 직접 접근하지 못하도록 캡슐화 w/ private
-    private Stack<Integer> stack = new Stack<Integer>();
+    private Stack<Integer> stack = new Stack<>();
 
     // 간접 접근으로 필드를 확인할 수 있도록 Getter 메서드 구현
     public int getStack() {
@@ -23,10 +20,11 @@ public class Calculator2 {
         this.stack.push(stack);
     }
 
-    int calculate(int a, String o, int b) {
+    public int calculate(int a, String o, int b) { // a: 첫 번째 숫자  0: 연산자   b: 두 번째 숫자
         if (o.equals("/") && b == 0) {
             System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-            return 0;
+            result = 0; /// //예외처리 혹은 throw
+            return result;
         } else {
             // 3. 계산
             // 사칙연산 종류에 적합한 연산을 진행한다.

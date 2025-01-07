@@ -13,12 +13,11 @@ public class App {
             // 1. 입력값
             // 양의 정수 두개를 입력 받는다.
             System.out.println("첫 번째 숫자를 입력하세요: ");
-            String no1 = sc.nextLine();
-            int a = Integer.parseInt(no1);
+            int a = sc.nextInt();
 
             System.out.println("두 번째 숫자를 입력하세요: ");
-            String no2 = sc.nextLine();
-            int b = Integer.parseInt(no2);
+            int b = sc.nextInt();
+
             // 사칙연산 기호를 입력 받는다.
             System.out.print("사칙연산 기호(+, -, *, /)를 입력하세요: ");
             String o = sc.nextLine();
