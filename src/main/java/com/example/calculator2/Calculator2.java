@@ -11,7 +11,7 @@ public class Calculator2 {
 
     // 간접 접근으로 필드를 확인할 수 있도록 Getter 메서드 구현
     public int getList() {
-        return list.get(0);
+        return list.get((list.size() - 1));
     }
 
     // 간접 접근으로 필드에 접근하여 데이터를 추가할 수 있게 Setter 메서드 구현
@@ -19,11 +19,15 @@ public class Calculator2 {
         this.list.add(list);
     }
 
-    public int calculate(int a, String o, int b) throws Exception{
+    public int calculate(int a, String o, int b) {
         int result = 0;
         try{
             // 3. 계산
-            // 사칙연산 종류에 적합한 연산을 진행한다.
+            // 유요한 연산자인지 먼저 확인
+            if (!(o.equals("+") || o.equals("-") || o.equals("*") || o.equals("/"))) {
+                throw new IllegalArgumentException("유효하지 않은 연산자입니다: " + o);
+            }
+            // 사칙연산 수행
             switch (o) {
                 case "+":
                     result = a + b;
@@ -35,17 +39,20 @@ public class Calculator2 {
                     result = a * b;
                     break;
                 case "/":
+                    if (b == 0) {
+                        throw new ArithmeticException("0으로 나눌 수 없습니다.");
+                    }
                     result = a / b;
                     break;
             }
-            return result;  //사칙연산 수행 후 결과값을 반환 및 연산 결과를 stack에 저장
-        } catch (Exception e) {
-            // 에러 로그 출력
-            e.printStackTrace();
-            // 에러 원인 조회 후 출력
-            e.getCause().printStackTrace();
-        } //
-        throw new Exception();
+        } catch (ArithmeticException e) {
+            System.out.println("연산 오류: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("입력 오류: " + e.getMessage());
+        } catch (Exception e){
+            System.out.println("알 수 없는 오류가 발생했습니다: " + e.getMessage());
+        }
+        return result;
     }
 
     // 리스트에 가장 먼저 들어간 데이터를 삭제하는 메서드
