@@ -25,10 +25,10 @@ public class App {
 
             int result = cal.calculate(a,o,b);
 
-            // 연산 결과 추가 여부 확인
-            System.out.println("방금 연산 결과를 추가하시겠습니까? (yes 입력 시 추가)");
+            // 연산 결과 저장 여부 확인
+            System.out.println("방금 연산 결과를 저장하시겠습니까? (yes 입력 시 추가)");
             String set = sc.nextLine();
-            // yes 입력 시 stack 의 데이터 삭제
+            // yes 입력 시 stack 에 데이터 저장
             if (set.equals("yes")) {
                 cal.setStack(result);
             }
@@ -39,6 +39,14 @@ public class App {
             // yes 입력 시 Calculator2의 stack 에 저장된 데이터 조회
             if (get.equals("yes")) {
                 System.out.println(cal.getStack());
+            }
+
+            // 가장 먼저 저장된 연산결과 데이터 삭제 여부 확인
+            System.out.println("가장 오래된 연산 결과를 삭제하시겠습니까? (yes 입력 시 삭제)");
+            String del = sc.nextLine();
+            if (del.equals("yes")) {
+                System.out.println("삭제 된 데이터: " + cal.removeResult());
+                cal.removeResult();
             }
 
             // 반복 확인
