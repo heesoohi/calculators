@@ -3,26 +3,26 @@ package com.example.calculator2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calculator2 {
+public class Calculator2<T extends Number> {
 
-    //연산 결과를 저장하는 컬렉션 타입 필드 : stack 활용
-    //외부에서 연산 결과를 저장한 stack 에 직접 접근하지 못하도록 캡슐화 w/ private
-    private final List<Integer> list = new ArrayList<>();
+    //연산 결과를 저장하는 컬렉션 타입 필드
+    //외부에서 직접 접근하지 못하도록 캡슐화 w/ private
+    private final List<T> list = new ArrayList<>();
 
     // 간접 접근으로 필드를 확인할 수 있도록 Getter 메서드 구현
-    public int getList() {
+    public T getList() {
         return list.get((list.size() - 1));
     }
 
     // 간접 접근으로 필드에 접근하여 데이터를 추가할 수 있게 Setter 메서드 구현
-    public void setList(int list) {
+    public void setList(T list) {
         this.list.add(list);
     }
 
     // Enum 타입으로 연산자 타입 정의
     public enum Operator {
         ADD("+"),
-        SUBSTRACT("-"),
+        SUBTRACT("-"),
         MULTIPLY("*"),
         DIVIDE("/");
 
@@ -46,16 +46,19 @@ public class Calculator2 {
         }
     }
 
+    // 제너릭 메서드로 다양한 타입의 숫자 처리
+    public T calculate(T a, Operator o, T b) {
+        double result = 0.0;
+        double a1 = a.doubleValue();
+        double b1 = b.doubleValue();
 
-    public int calculate(int a, Operator o, int b) {
-        int result = 0;
         try{
             // 3. 계산
             result = switch (o) {
-                case ADD -> a + b;
-                case SUBSTRACT -> a - b;
-                case MULTIPLY -> a * b;
-                case DIVIDE -> a / b;
+                case ADD -> a1 + b1;
+                case SUBTRACT -> a1 - b1;
+                case MULTIPLY -> a1 * b1;
+                case DIVIDE -> a1 / b1;
             };
         } catch (ArithmeticException e) {
             System.out.println("연산 오류: " + e.getMessage());
@@ -64,17 +67,24 @@ public class Calculator2 {
         } catch (Exception e){
             System.out.println("알 수 없는 오류가 발생했습니다: " + e.getMessage());
         }
-        return result;
+
+        if (a instanceof Integer) {
+            return (T) Integer.valueOf((int) result);
+        } else if (a instanceof Double) {
+            return (T) Double.valueOf(result);
+        } else {
+            throw new UnsupportedOperationException("지원하지 않는 타입입니다.");
+        }
     }
 
     // 리스트에 가장 먼저 들어간 데이터를 삭제하는 메서드
-    public Integer removeResult() {
+    public T removeResult() {
         if (list.isEmpty()) {
             System.out.println("저장된 연산 결과가 없습니다.");
             return null;
         }
 
-        int firstData = list.get(0);
+        T firstData = list.get(0);
 
         list.remove(0);
 
