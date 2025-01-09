@@ -19,16 +19,43 @@ public class Calculator2 {
         this.list.add(list);
     }
 
-    public int calculate(int a, String o, int b) {
+    // Enum 타입으로 연산자 타입 정의
+    public enum Operator {
+        ADD("+"),
+        SUBSTRACT("-"),
+        MULTIPLY("*"),
+        DIVIDE("/");
+
+        private final String operator;
+
+        Operator(String operator) {
+            this.operator = operator;
+        }
+
+        public String getOperator() {
+            return operator;
+        }
+
+        public static Operator fromString(String operator) {
+            for (Operator op : Operator.values()) {
+                if (op.getOperator().equals(operator)) {
+                    return op;
+                }
+            }
+            throw new IllegalArgumentException("유효하지 않은 연산자입니다: "+operator);
+        }
+    }
+
+
+    public int calculate(int a, Operator o, int b) {
         int result = 0;
         try{
             // 3. 계산
             result = switch (o) {
-                case "+" -> a + b;
-                case "-" -> a - b;
-                case "*" -> a * b;
-                case "/" -> a / b;
-                default -> result;
+                case ADD -> a + b;
+                case SUBSTRACT -> a - b;
+                case MULTIPLY -> a * b;
+                case DIVIDE -> a / b;
             };
         } catch (ArithmeticException e) {
             System.out.println("연산 오류: " + e.getMessage());

@@ -9,7 +9,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            try {  // 스캐너로 입력값 받으면서 오류가 발생할 수 있으니 try ~ catch문 사용
+            try {  // 스캐너로 입력값 받으면서 오류가 발생할 수 있으니 try ~ catch 문 사용
                 // 1. 숫자 입력
                 System.out.println("첫 번째 숫자를 입력하세요: ");
                 int a = sc.nextInt();
@@ -21,9 +21,10 @@ public class App {
                 // 2. 연산자 입력
                 System.out.print("사칙연산 기호(+, -, *, /)를 입력하세요: ");
                 String o = sc.nextLine();
+                Calculator2.Operator op = Calculator2.Operator.fromString(o);
 
                 // 3. 사칙연산 수행
-                int result = cal.calculate(a, o, b);
+                int result = cal.calculate(a, op, b);
                 System.out.println("연산 결과: " + result);
 
                 // 4. 연산 결과 저장 여부 확인
