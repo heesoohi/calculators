@@ -11,7 +11,12 @@ public class Calculator2<T extends Number> {
 
     // 간접 접근으로 필드를 확인할 수 있도록 Getter 메서드 구현
     public T getList() {
-        return list.get((list.size() - 1));
+        try {
+            return list.get((list.size() - 1));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("저장된 연산결과가 없습니다.");
+            return null;
+        }
     }
 
     // 간접 접근으로 필드에 접근하여 데이터를 추가할 수 있게 Setter 메서드 구현
@@ -28,14 +33,17 @@ public class Calculator2<T extends Number> {
 
         private final String operator;
 
+        // 생성자
         Operator(String operator) {
             this.operator = operator;
         }
 
+        // 연산자 문자열 반환
         public String getOperator() {
             return operator;
         }
 
+        // 문자열을 연산자 타입으로 변환하는 메서드
         public static Operator fromString(String operator) {
             for (Operator op : Operator.values()) {
                 if (op.getOperator().equals(operator)) {
